@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/my_infer.dir/main.cpp.o CMakeFiles/my_infer.dir/test/test_create_tensor.cpp.o CMakeFiles/my_infer.dir/source/data/tensor.cpp.o -o my_infer  -Wl,-rpath,/home/libo/anaconda3/lib /home/libo/anaconda3/lib/libglog.so.0.5.0 /home/libo/anaconda3/lib/libgtest.so.1.11.0 /usr/lib/x86_64-linux-gnu/libopenblas.so /home/libo/anaconda3/lib/libgflags.so.2.2.2 -lpthread 

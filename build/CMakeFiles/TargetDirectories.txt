@@ -1,0 +1,4 @@
+/home/libo/my_infer/build/CMakeFiles/my_infer.dir
+/home/libo/my_infer/build/CMakeFiles/test.dir
+/home/libo/my_infer/build/CMakeFiles/edit_cache.dir
+/home/libo/my_infer/build/CMakeFiles/rebuild_cache.dir
