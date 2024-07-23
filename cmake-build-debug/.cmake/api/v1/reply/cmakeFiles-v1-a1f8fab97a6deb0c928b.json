@@ -1,0 +1,314 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.26.4/CMakeSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/UnixPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/Platform/Linux-GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/benchmark/benchmarkConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/benchmark/benchmarkConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckIncludeFileCXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/benchmark/benchmarkTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/benchmark/benchmarkTargets-release.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindArmadillo.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/glog/glog-config-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/glog/glog-config.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/glog/glog-modules.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/gflags/gflags-config-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/gflags/gflags-config.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/gflags/gflags-nonamespace-targets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/gflags/gflags-nonamespace-targets-release.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/share/glog/cmake/FindUnwind.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/glog/glog-targets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/glog/glog-targets-noconfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindGTest.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/GoogleTest.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/GTest/GTestConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/GTest/GTestConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/GTest/GTestTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/local/lib/cmake/GTest/GTestTargets-noconfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindBLAS.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckFunctionExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckIncludeFileCXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/libo/.cache/JetBrains/RemoteDev/dist/8cdb604a302b8_CLion-232.8660.139/bin/cmake/linux/x64/share/cmake-3.26/Modules/FindPackageMessage.cmake"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "/home/libo/my_infer/cmake-build-debug",
+		"source" : "/home/libo/my_infer"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

@@ -4,14 +4,16 @@
 
 #include <glog/logging.h>
 #include <gtest/gtest.h>
+#include "data/tensor.hpp"
 
-#include <iostream>
 int main(int argc, char *argv[]) {
-  testing::InitGoogleTest(&argc, argv);
-  google::InitGoogleLogging("Kuiper");
-  FLAGS_log_dir = "../../course2/log";
-  FLAGS_alsologtostderr = true;
+    // my_infer::Tensor<float>(10);
 
-  LOG(INFO) << "Start test...\n";
-  return RUN_ALL_TESTS();
+    testing::InitGoogleTest(&argc, argv);
+    google::InitGoogleLogging("Kuiper");
+    FLAGS_log_dir = "../../course2/log";
+    FLAGS_alsologtostderr = true;
+
+    LOG(INFO) << "Start test...\n";
+    return RUN_ALL_TESTS();
 }

@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/libo/my_infer/build",
+  "command": "/usr/bin/c++ -DGFLAGS_IS_A_DLL=0 -DGTEST_LINKED_AS_SHARED_LIBRARY=1 -I/home/libo/my_infer/./include -isystem /home/libo/anaconda3/include -g -o CMakeFiles/my_infer.dir/main.cpp.o -c /home/libo/my_infer/main.cpp",
+  "file": "/home/libo/my_infer/main.cpp"
+},
+{
+  "directory": "/home/libo/my_infer/build",
+  "command": "/usr/bin/c++ -DGFLAGS_IS_A_DLL=0 -DGTEST_LINKED_AS_SHARED_LIBRARY=1 -I/home/libo/my_infer/./include -isystem /home/libo/anaconda3/include -g -o CMakeFiles/my_infer.dir/test/test_create_tensor.cpp.o -c /home/libo/my_infer/test/test_create_tensor.cpp",
+  "file": "/home/libo/my_infer/test/test_create_tensor.cpp"
+},
+{
+  "directory": "/home/libo/my_infer/build",
+  "command": "/usr/bin/c++ -DGFLAGS_IS_A_DLL=0 -DGTEST_LINKED_AS_SHARED_LIBRARY=1 -I/home/libo/my_infer/./include -isystem /home/libo/anaconda3/include -g -o CMakeFiles/my_infer.dir/source/data/tensor.cpp.o -c /home/libo/my_infer/source/data/tensor.cpp",
+  "file": "/home/libo/my_infer/source/data/tensor.cpp"
+}
+]

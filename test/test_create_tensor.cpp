@@ -3,10 +3,43 @@
 #include <gtest/gtest.h>
 #include <memory>
 #include "data/tensor_util.hpp"
-#pragma once
 
-typedef std::shared_ptr<Tensor<float>> sftensor;
+using sftensor = std::shared_ptr<Tensor<float>>;
+using ftensor = Tensor<float>;
 
+TEST(test_tensor, index1) {
+  using namespace my_infer;
+  Tensor<float> f3(3, 3, 3);
+  ASSERT_EQ(f3.empty(), false);
+  std::vector<float> values;
+  for (int i = 0; i < 27; ++i) {
+    values.push_back(1);
+  }
+  f3.Fill(values);
+  for (int i = 0; i < 27; ++i) {
+    ASSERT_EQ(f3.index(i), 1);
+  }
+}
+
+TEST(test_tensor, index2) {
+  using namespace my_infer;
+  Tensor<float> f3(3, 3, 3);
+  f3.index(3) = 4;
+  ASSERT_EQ(f3.index(3), 4);
+}
+TEST(test_tensor, fill2) {
+  using namespace my_infer;
+
+  Tensor<float> f3(3, 3, 3);
+  f3.Fill(1.f);
+  for (int c = 0; c < 3; ++c) {
+    for (int i = 0; i < f3.rows(); ++i) {
+      for (int j = 0; j < f3.cols(); ++j) {
+        ASSERT_EQ(f3.at(c, i, j), 1.f);
+      }
+    }
+  }
+}
 TEST(test_tensor, fill1) {
   using namespace my_infer;
 
@@ -100,32 +133,150 @@ TEST(test_tensor, tensor_values_col1) {
   ASSERT_EQ(values_output.at(2), 1);
   ASSERT_EQ(values_output.at(3), 3);
 }
-// TEST(test_tensor, tensor_init1) {
-//   using namespace my_infer;
-//   Tensor<float> f1(3, 224, 224);
-//   ASSERT_EQ(f1.channels(), 3);
-//   ASSERT_EQ(f1.rows(), 224);
-//   ASSERT_EQ(f1.cols(), 224);
-//   ASSERT_EQ(f1.size(), 224 * 224 * 3);
-// }
-// 
-// TEST(test_tensor, tensor_init1_1d) {
-//   using namespace my_infer;
-//   Tensor<float> f1(3);
-//   const auto& raw_shapes = f1.raw_shapes();
-//   ASSERT_EQ(raw_shapes.size(), 1);
-//   ASSERT_EQ(raw_shapes.at(0), 3);
-// }
-// 
-// TEST(test_tensor, tensor_init1_2d) {
-//   using namespace my_infer;
-//   Tensor<float> f1(32, 24);
-//   const auto& raw_shapes = f1.raw_shapes();
-//   ASSERT_EQ(raw_shapes.size(), 2);
-//   ASSERT_EQ(raw_shapes.at(0), 32);
-//   ASSERT_EQ(raw_shapes.at(1), 24);
-// }
-// 
+
+TEST(test_tensor, raw_shapes1) {
+  using namespace my_infer;
+  Tensor<float> f3(2, 3, 4);
+  f3.Reshape({24});
+  const auto& shapes = f3.raw_shapes();
+  ASSERT_EQ(shapes.size(), 1);
+  ASSERT_EQ(shapes.at(0), 24);
+}
+
+TEST(test_tensor, raw_shapes2) {
+  using namespace my_infer;
+  Tensor<float> f3(2, 3, 4);
+  f3.Reshape({4, 6});
+  const auto& shapes = f3.raw_shapes();
+  ASSERT_EQ(shapes.size(), 2);
+  ASSERT_EQ(shapes.at(0), 4);
+  ASSERT_EQ(shapes.at(1), 6);
+}
+
+TEST(test_tensor, raw_shapes3) {
+  using namespace my_infer;
+  Tensor<float> f3(2, 3, 4);
+  f3.Reshape({4, 3, 2});
+  const auto& shapes = f3.raw_shapes();
+  ASSERT_EQ(shapes.size(), 3);
+  ASSERT_EQ(shapes.at(0), 4);
+  ASSERT_EQ(shapes.at(1), 3);
+  ASSERT_EQ(shapes.at(2), 2);
+}
+
+TEST(test_tensor, raw_view1) {
+  using namespace my_infer;
+  Tensor<float> f3(2, 3, 4);
+  f3.Reshape({24}, true);
+  const auto& shapes = f3.raw_shapes();
+  ASSERT_EQ(shapes.size(), 1);
+  ASSERT_EQ(shapes.at(0), 24);
+}
+
+TEST(test_tensor, raw_view2) {
+  using namespace my_infer;
+  Tensor<float> f3(2, 3, 4);
+  f3.Reshape({4, 6}, true);
+  const auto& shapes = f3.raw_shapes();
+  ASSERT_EQ(shapes.size(), 2);
+  ASSERT_EQ(shapes.at(0), 4);
+  ASSERT_EQ(shapes.at(1), 6);
+}
+
+TEST(test_tensor, raw_view11) {
+  using namespace my_infer;
+  Tensor<float> f3(122, 553, 444);
+  f3.Reshape({444, 553, 122}, true);
+  const auto& shapes = f3.raw_shapes();
+  ASSERT_EQ(shapes.size(), 3);
+  ASSERT_EQ(shapes.at(0), 444);
+}
+
+TEST(test_tensor, raw_view3) {
+  using namespace my_infer;
+  Tensor<float> f3(2, 3, 4);
+  f3.Reshape({4, 3, 2}, true);
+  const auto& shapes = f3.raw_shapes();
+  ASSERT_EQ(shapes.size(), 3);
+  ASSERT_EQ(shapes.at(0), 4);
+  ASSERT_EQ(shapes.at(1), 3);
+  ASSERT_EQ(shapes.at(2), 2);
+}
+
+TEST(test_tensor, reshape1) {
+  using namespace my_infer;
+  arma::fmat f1 =
+      "1,3;"
+      "2,4";
+
+  arma::fmat f2 =
+      "1,3;"
+      "2,4";
+  sftensor data = TensorCreate<float>(2, 2, 2);
+  data->slice(0) = f1;
+  data->slice(1) = f2;
+  data->Reshape({8});
+  for (uint32_t i = 0; i < 4; ++i) {
+    ASSERT_EQ(data->index(i), i + 1);
+  }
+
+  for (uint32_t i = 4; i < 8; ++i) {
+    ASSERT_EQ(data->index(i - 4), i - 4 + 1);
+  }
+}
+
+TEST(test_tensor, reshape2) {
+  using namespace my_infer;
+  arma::fmat f1 =
+      "0,2;"
+      "1,3";
+
+  arma::fmat f2 =
+      "0,2;"
+      "1,3";
+
+  sftensor data = TensorCreate<float>(2, 2, 2);
+  data->slice(0) = f1;
+  data->slice(1) = f2;
+  data->Reshape({2, 4});
+  for (uint32_t i = 0; i < 4; ++i) {
+    ASSERT_EQ(data->index(i), i);
+  }
+
+  for (uint32_t i = 4; i < 8; ++i) {
+    ASSERT_EQ(data->index(i), i - 4);
+  }
+}
+
+
+
+
+TEST(test_tensor, tensor_init1) {
+  using namespace my_infer;
+  Tensor<float> f1(3, 224, 224);
+  ASSERT_EQ(f1.channels(), 3);
+  ASSERT_EQ(f1.rows(), 224);
+  ASSERT_EQ(f1.cols(), 224);
+  ASSERT_EQ(f1.size(), 224 * 224 * 3);
+}
+
+TEST(test_tensor, tensor_init1_1d) {
+  using namespace my_infer;
+  Tensor<float> f1(3);
+  const auto& raw_shapes = f1.raw_shapes();
+  ASSERT_EQ(raw_shapes.size(), 1);
+  ASSERT_EQ(raw_shapes.at(0), 3);
+}
+
+TEST(test_tensor, tensor_init1_2d) {
+  using namespace my_infer;
+  Tensor<float> f1(32, 24);
+  const auto& raw_shapes = f1.raw_shapes();
+  ASSERT_EQ(raw_shapes.size(), 2);
+  ASSERT_EQ(raw_shapes.at(0), 32);
+  ASSERT_EQ(raw_shapes.at(1), 24);
+}
+
 // TEST(test_tensor, test_init1_2d_1) {
 //   using namespace my_infer;
 //   Tensor<float> f1(1, 24);
@@ -133,103 +284,222 @@ TEST(test_tensor, tensor_values_col1) {
 //   ASSERT_EQ(raw_shapes.size(), 1);
 //   ASSERT_EQ(raw_shapes.at(0), 24);
 // }
-// 
-// TEST(test_tensor, tensor_init2) {
-//   using namespace my_infer;
-//   Tensor<float> f1(std::vector<uint32_t>{3, 224, 224});
-//   ASSERT_EQ(f1.channels(), 3);
-//   ASSERT_EQ(f1.rows(), 224);
-//   ASSERT_EQ(f1.cols(), 224);
-//   ASSERT_EQ(f1.size(), 224 * 224 * 3);
-// }
-// 
-// TEST(test_tensor, tensor_init3) {
-//   using namespace my_infer;
-//   Tensor<float> f1(std::vector<uint32_t>{1, 13, 14});
-//   ASSERT_EQ(f1.channels(), 1);
-//   ASSERT_EQ(f1.rows(), 13);
-//   ASSERT_EQ(f1.cols(), 14);
-//   ASSERT_EQ(f1.size(), 13 * 14);
-// }
-// 
-// TEST(test_tensor, tensor_init4) {
-//   using namespace my_infer;
-//   Tensor<float> f1(std::vector<uint32_t>{13, 15});
-//   ASSERT_EQ(f1.channels(), 1);
-//   ASSERT_EQ(f1.rows(), 13);
-//   ASSERT_EQ(f1.cols(), 15);
-//   ASSERT_EQ(f1.size(), 13 * 15);
-// }
-// 
-// TEST(test_tensor, tensor_init5) {
-//   using namespace my_infer;
-//   Tensor<float> f1(std::vector<uint32_t>{16, 13, 15});
-//   ASSERT_EQ(f1.channels(), 16);
-//   ASSERT_EQ(f1.rows(), 13);
-//   ASSERT_EQ(f1.cols(), 15);
-//   ASSERT_EQ(f1.size(), 16 * 13 * 15);
-// }
-// 
-// TEST(test_tensor, copy_construct1) {
-//   using namespace my_infer;
-//   Tensor<float> f1(3, 224, 224);
-//   f1.RandN();
-//   Tensor<float> f2(f1);
-//   ASSERT_EQ(f2.channels(), 3);
-//   ASSERT_EQ(f2.rows(), 224);
-//   ASSERT_EQ(f2.cols(), 224);
-// 
-//   ASSERT_TRUE(arma::approx_equal(f2.data(), f1.data(), "absdiff", 1e-4));
-// }
-// 
-// TEST(test_tensor, copy_construct2) {
-//   using namespace my_infer;
-//   Tensor<float> f1(3, 2, 1);
-//   Tensor<float> f2(3, 224, 224);
-//   f2.RandN();
-//   f1 = f2;
-//   ASSERT_EQ(f1.channels(), 3);
-//   ASSERT_EQ(f1.rows(), 224);
-//   ASSERT_EQ(f1.cols(), 224);
-// 
-//   ASSERT_TRUE(arma::approx_equal(f2.data(), f1.data(), "absdiff", 1e-4));
-// }
-// 
-// TEST(test_tensor, copy_construct3) {
-//   using namespace my_infer;
-//   Tensor<float> f1(3, 2, 1);
-//   Tensor<float> f2(std::vector<uint32_t>{3, 224, 224});
-//   f2.RandN();
-//   f1 = f2;
-//   ASSERT_EQ(f1.channels(), 3);
-//   ASSERT_EQ(f1.rows(), 224);
-//   ASSERT_EQ(f1.cols(), 224);
-// 
-//   ASSERT_TRUE(arma::approx_equal(f2.data(), f1.data(), "absdiff", 1e-4));
-// }
-// 
-// TEST(test_tensor, move_construct1) {
-//   using namespace my_infer;
-//   Tensor<float> f1(3, 2, 1);
-//   Tensor<float> f2(3, 224, 224);
-//   f1 = std::move(f2);
-//   ASSERT_EQ(f1.channels(), 3);
-//   ASSERT_EQ(f1.rows(), 224);
-//   ASSERT_EQ(f1.cols(), 224);
-// 
-//   ASSERT_EQ(f2.data().memptr(), nullptr);
-// }
-// 
-// TEST(test_tensor, move_construct2) {
-//   using namespace my_infer;
-//   Tensor<float> f2(3, 224, 224);
-//   Tensor<float> f1(std::move(f2));
-//   ASSERT_EQ(f1.channels(), 3);
-//   ASSERT_EQ(f1.rows(), 224);
-//   ASSERT_EQ(f1.cols(), 224);
-// 
-//   ASSERT_EQ(f2.data().memptr(), nullptr);
-// }
+
+TEST(test_tensor, tensor_init2) {
+  using namespace my_infer;
+  Tensor<float> f1(std::vector<uint32_t>{3, 224, 224});
+  ASSERT_EQ(f1.channels(), 3);
+  ASSERT_EQ(f1.rows(), 224);
+  ASSERT_EQ(f1.cols(), 224);
+  ASSERT_EQ(f1.size(), 224 * 224 * 3);
+}
+
+TEST(test_tensor, tensor_init3) {
+  using namespace my_infer;
+  Tensor<float> f1(std::vector<uint32_t>{1, 13, 14});
+  ASSERT_EQ(f1.channels(), 1);
+  ASSERT_EQ(f1.rows(), 13);
+  ASSERT_EQ(f1.cols(), 14);
+  ASSERT_EQ(f1.size(), 13 * 14);
+}
+
+TEST(test_tensor, tensor_init4) {
+  using namespace my_infer;
+  Tensor<float> f1(std::vector<uint32_t>{13, 15});
+  ASSERT_EQ(f1.channels(), 1);
+  ASSERT_EQ(f1.rows(), 13);
+  ASSERT_EQ(f1.cols(), 15);
+  ASSERT_EQ(f1.size(), 13 * 15);
+}
+
+TEST(test_tensor, tensor_init5) {
+  using namespace my_infer;
+  Tensor<float> f1(std::vector<uint32_t>{16, 13, 15});
+  ASSERT_EQ(f1.channels(), 16);
+  ASSERT_EQ(f1.rows(), 13);
+  ASSERT_EQ(f1.cols(), 15);
+  ASSERT_EQ(f1.size(), 16 * 13 * 15);
+}
+
+TEST(test_tensor, copy_construct1) {
+  using namespace my_infer;
+  Tensor<float> f1(3, 224, 224);
+  f1.Rand();
+  Tensor<float> f2(f1);
+  ASSERT_EQ(f2.channels(), 3);
+  ASSERT_EQ(f2.rows(), 224);
+  ASSERT_EQ(f2.cols(), 224);
+
+  ASSERT_TRUE(arma::approx_equal(f2.data(), f1.data(), "absdiff", 1e-4));
+}
+
+TEST(test_tensor, copy_construct2) {
+  using namespace my_infer;
+  Tensor<float> f1(3, 2, 1);
+  Tensor<float> f2(3, 224, 224);
+  f2.Rand();
+  f1 = f2;
+  ASSERT_EQ(f1.channels(), 3);
+  ASSERT_EQ(f1.rows(), 224);
+  ASSERT_EQ(f1.cols(), 224);
+
+  ASSERT_TRUE(arma::approx_equal(f2.data(), f1.data(), "absdiff", 1e-4));
+}
+
+TEST(test_tensor, copy_construct3) {
+  using namespace my_infer;
+  Tensor<float> f1(3, 2, 1);
+  Tensor<float> f2(std::vector<uint32_t>{3, 224, 224});
+  f2.Rand();
+  f1 = f2;
+  ASSERT_EQ(f1.channels(), 3);
+  ASSERT_EQ(f1.rows(), 224);
+  ASSERT_EQ(f1.cols(), 224);
+
+  ASSERT_TRUE(arma::approx_equal(f2.data(), f1.data(), "absdiff", 1e-4));
+}
+
+TEST(test_tensor, move_construct1) {
+  using namespace my_infer;
+  Tensor<float> f1(3, 2, 1);
+  Tensor<float> f2(3, 224, 224);
+  f1 = std::move(f2);
+  ASSERT_EQ(f1.channels(), 3);
+  ASSERT_EQ(f1.rows(), 224);
+  ASSERT_EQ(f1.cols(), 224);
+
+  ASSERT_EQ(f2.data().memptr(), nullptr);
+}
+
+TEST(test_tensor, move_construct2) {
+  using namespace my_infer;
+  Tensor<float> f2(3, 224, 224);
+  Tensor<float> f1(std::move(f2));
+  ASSERT_EQ(f1.channels(), 3);
+  ASSERT_EQ(f1.rows(), 224);
+  ASSERT_EQ(f1.cols(), 224);
+
+  ASSERT_EQ(f2.data().memptr(), nullptr);
+}
+TEST(test_tensor, transform1) {
+  using namespace my_infer;
+
+  Tensor<float> f3(3, 3, 3);
+  ASSERT_EQ(f3.empty(), false);
+  f3.Transform([](const float& value) { return 1.f; });
+  for (int i = 0; i < f3.size(); ++i) {
+    ASSERT_EQ(f3.index(i), 1.f);
+  }
+}
+
+TEST(test_tensor, transform2) {
+  using namespace my_infer;
+
+  Tensor<float> f3(3, 3, 3);
+  ASSERT_EQ(f3.empty(), false);
+  f3.Fill(1.f);
+  f3.Transform([](const float& value) { return value * 2.f; });
+  for (int i = 0; i < f3.size(); ++i) {
+    ASSERT_EQ(f3.index(i), 2.f);
+  }
+}
+
+TEST(test_tensor, flatten1) {
+  using namespace my_infer;
+
+  Tensor<float> f3(3, 3, 3);
+  std::vector<float> values;
+  for (int i = 0; i < 27; ++i) {
+    values.push_back(float(i));
+  }
+  f3.Fill(values);
+  f3.Flatten(false);
+  ASSERT_EQ(f3.channels(), 1);
+  ASSERT_EQ(f3.rows(), 1);
+  ASSERT_EQ(f3.cols(), 27);
+  ASSERT_EQ(f3.index(0), 0);
+  ASSERT_EQ(f3.index(1), 3);
+  ASSERT_EQ(f3.index(2), 6);
+
+  ASSERT_EQ(f3.index(3), 1);
+  ASSERT_EQ(f3.index(4), 4);
+  ASSERT_EQ(f3.index(5), 7);
+
+  ASSERT_EQ(f3.index(6), 2);
+  ASSERT_EQ(f3.index(7), 5);
+  ASSERT_EQ(f3.index(8), 8);
+}
+
+TEST(test_tensor, flatten2) {
+  using namespace my_infer;
+
+  Tensor<float> f3(3, 3, 3);
+  std::vector<float> values;
+  for (int i = 0; i < 27; ++i) {
+    values.push_back(float(i));
+  }
+  f3.Fill(values);
+  f3.Flatten(true);
+  for (int i = 0; i < 27; ++i) {
+    ASSERT_EQ(f3.index(i), i);
+  }
+}
+TEST(test_tensor, padding1) {
+  using namespace my_infer;
+  Tensor<float> tensor(3, 4, 5);
+  ASSERT_EQ(tensor.channels(), 3);
+  ASSERT_EQ(tensor.rows(), 4);
+  ASSERT_EQ(tensor.cols(), 5);
+
+  tensor.Fill(1.f);
+  tensor.Padding({1, 2, 3, 4}, 0);
+  ASSERT_EQ(tensor.rows(), 7);
+  ASSERT_EQ(tensor.cols(), 12);
+
+  int index = 0;
+  for (int c = 0; c < tensor.channels(); ++c) {
+    for (int r = 0; r < tensor.rows(); ++r) {
+      for (int c_ = 0; c_ < tensor.cols(); ++c_) {
+        if ((r >= 2 && r <= 4) && (c_ >= 3 && c_ <= 7)) {
+          ASSERT_EQ(tensor.at(c, r, c_), 1.f) << c << " "
+                                              << " " << r << " " << c_;
+        }
+        index += 1;
+      }
+    }
+  }
+}
+
+TEST(test_tensor, padding2) {
+  using namespace my_infer;
+
+  ftensor tensor(3, 4, 5);
+  ASSERT_EQ(tensor.channels(), 3);
+  ASSERT_EQ(tensor.rows(), 4);
+  ASSERT_EQ(tensor.cols(), 5);
+
+  tensor.Fill(1.f);
+  tensor.Padding({2, 2, 2, 2}, 3.14f);
+  ASSERT_EQ(tensor.rows(), 8);
+  ASSERT_EQ(tensor.cols(), 9);
+
+  int index = 0;
+  for (int c = 0; c < tensor.channels(); ++c) {
+    for (int r = 0; r < tensor.rows(); ++r) {
+      for (int c_ = 0; c_ < tensor.cols(); ++c_) {
+        if (c_ <= 1 || r <= 1) {
+          ASSERT_EQ(tensor.at(c, r, c_), 3.14f);
+        } else if (c >= tensor.cols() - 1 || r >= tensor.rows() - 1) {
+          ASSERT_EQ(tensor.at(c, r, c_), 3.14f);
+        }
+        if ((r >= 2 && r <= 5) && (c_ >= 2 && c_ <= 6)) {
+          ASSERT_EQ(tensor.at(c, r, c_), 1.f);
+        }
+        index += 1;
+      }
+    }
+  }
+}
 // 
 // TEST(test_tensor, set_data) {
 //   using namespace my_infer;
@@ -261,29 +531,6 @@ TEST(test_tensor, tensor_values_col1) {
 //   ASSERT_EQ(f3.empty(), false);
 // }
 // 
-// TEST(test_tensor, transform1) {
-//   using namespace my_infer;
-// 
-//   Tensor<float> f3(3, 3, 3);
-//   ASSERT_EQ(f3.empty(), false);
-//   f3.Transform([](const float& value) { return 1.f; });
-//   for (int i = 0; i < f3.size(); ++i) {
-//     ASSERT_EQ(f3.index(i), 1.f);
-//   }
-// }
-// 
-// TEST(test_tensor, transform2) {
-//   using namespace my_infer;
-// 
-//   Tensor<float> f3(3, 3, 3);
-//   ASSERT_EQ(f3.empty(), false);
-//   f3.Fill(1.f);
-//   f3.Transform([](const float& value) { return value * 2.f; });
-//   for (int i = 0; i < f3.size(); ++i) {
-//     ASSERT_EQ(f3.index(i), 2.f);
-//   }
-// }
-// 
 // TEST(test_tensor, clone) {
 //   using namespace my_infer;
 // 
@@ -313,67 +560,7 @@ TEST(test_tensor, tensor_values_col1) {
 //   ASSERT_EQ(f3.raw_ptr(1), f3.data().mem + 1);
 // }
 // 
-// TEST(test_tensor, index1) {
-//   using namespace my_infer;
-//   Tensor<float> f3(3, 3, 3);
-//   ASSERT_EQ(f3.empty(), false);
-//   std::vector<float> values;
-//   for (int i = 0; i < 27; ++i) {
-//     values.push_back(1);
-//   }
-//   f3.Fill(values);
-//   for (int i = 0; i < 27; ++i) {
-//     ASSERT_EQ(f3.index(i), 1);
-//   }
-// }
 // 
-// TEST(test_tensor, index2) {
-//   using namespace my_infer;
-//   Tensor<float> f3(3, 3, 3);
-//   f3.index(3) = 4;
-//   ASSERT_EQ(f3.index(3), 4);
-// }
-// 
-// TEST(test_tensor, flatten1) {
-//   using namespace my_infer;
-// 
-//   Tensor<float> f3(3, 3, 3);
-//   std::vector<float> values;
-//   for (int i = 0; i < 27; ++i) {
-//     values.push_back(float(i));
-//   }
-//   f3.Fill(values);
-//   f3.Flatten(false);
-//   ASSERT_EQ(f3.channels(), 1);
-//   ASSERT_EQ(f3.rows(), 1);
-//   ASSERT_EQ(f3.cols(), 27);
-//   ASSERT_EQ(f3.index(0), 0);
-//   ASSERT_EQ(f3.index(1), 3);
-//   ASSERT_EQ(f3.index(2), 6);
-// 
-//   ASSERT_EQ(f3.index(3), 1);
-//   ASSERT_EQ(f3.index(4), 4);
-//   ASSERT_EQ(f3.index(5), 7);
-// 
-//   ASSERT_EQ(f3.index(6), 2);
-//   ASSERT_EQ(f3.index(7), 5);
-//   ASSERT_EQ(f3.index(8), 8);
-// }
-// 
-// TEST(test_tensor, flatten2) {
-//   using namespace my_infer;
-// 
-//   Tensor<float> f3(3, 3, 3);
-//   std::vector<float> values;
-//   for (int i = 0; i < 27; ++i) {
-//     values.push_back(float(i));
-//   }
-//   f3.Fill(values);
-//   f3.Flatten(true);
-//   for (int i = 0; i < 27; ++i) {
-//     ASSERT_EQ(f3.index(i), i);
-//   }
-// }
 // 
 // TEST(test_tensor, create1) {
 //   using namespace my_infer;
@@ -434,19 +621,6 @@ TEST(test_tensor, tensor_values_col1) {
 //   }
 // }
 // 
-// TEST(test_tensor, fill2) {
-//   using namespace my_infer;
-// 
-//   Tensor<float> f3(3, 3, 3);
-//   f3.Fill(1.f);
-//   for (int c = 0; c < 3; ++c) {
-//     for (int i = 0; i < f3.rows(); ++i) {
-//       for (int j = 0; j < f3.cols(); ++j) {
-//         ASSERT_EQ(f3.at(c, i, j), 1.f);
-//       }
-//     }
-//   }
-// }
 // 
 // TEST(test_tensor, add1) {
 //   using namespace my_infer;
@@ -609,130 +783,6 @@ TEST(test_tensor, tensor_values_col1) {
 //   ASSERT_EQ(shapes.at(2), 4);
 // }
 // 
-// TEST(test_tensor, raw_shapes1) {
-//   using namespace my_infer;
-//   Tensor<float> f3(2, 3, 4);
-//   f3.Reshape({24});
-//   const auto& shapes = f3.raw_shapes();
-//   ASSERT_EQ(shapes.size(), 1);
-//   ASSERT_EQ(shapes.at(0), 24);
-// }
-// 
-// TEST(test_tensor, raw_shapes2) {
-//   using namespace my_infer;
-//   Tensor<float> f3(2, 3, 4);
-//   f3.Reshape({4, 6});
-//   const auto& shapes = f3.raw_shapes();
-//   ASSERT_EQ(shapes.size(), 2);
-//   ASSERT_EQ(shapes.at(0), 4);
-//   ASSERT_EQ(shapes.at(1), 6);
-// }
-// 
-// TEST(test_tensor, raw_shapes3) {
-//   using namespace my_infer;
-//   Tensor<float> f3(2, 3, 4);
-//   f3.Reshape({4, 3, 2});
-//   const auto& shapes = f3.raw_shapes();
-//   ASSERT_EQ(shapes.size(), 3);
-//   ASSERT_EQ(shapes.at(0), 4);
-//   ASSERT_EQ(shapes.at(1), 3);
-//   ASSERT_EQ(shapes.at(2), 2);
-// }
-// 
-// TEST(test_tensor, raw_view1) {
-//   using namespace my_infer;
-//   Tensor<float> f3(2, 3, 4);
-//   f3.Reshape({24}, true);
-//   const auto& shapes = f3.raw_shapes();
-//   ASSERT_EQ(shapes.size(), 1);
-//   ASSERT_EQ(shapes.at(0), 24);
-// }
-// 
-// TEST(test_tensor, raw_view2) {
-//   using namespace my_infer;
-//   Tensor<float> f3(2, 3, 4);
-//   f3.Reshape({4, 6}, true);
-//   const auto& shapes = f3.raw_shapes();
-//   ASSERT_EQ(shapes.size(), 2);
-//   ASSERT_EQ(shapes.at(0), 4);
-//   ASSERT_EQ(shapes.at(1), 6);
-// }
-// 
-// TEST(test_tensor, raw_view11) {
-//   using namespace my_infer;
-//   Tensor<float> f3(122, 553, 444);
-//   f3.Reshape({444, 553, 122}, true);
-//   const auto& shapes = f3.raw_shapes();
-//   ASSERT_EQ(shapes.size(), 3);
-//   ASSERT_EQ(shapes.at(0), 444);
-// }
-// 
-// TEST(test_tensor, raw_view3) {
-//   using namespace my_infer;
-//   Tensor<float> f3(2, 3, 4);
-//   f3.Reshape({4, 3, 2}, true);
-//   const auto& shapes = f3.raw_shapes();
-//   ASSERT_EQ(shapes.size(), 3);
-//   ASSERT_EQ(shapes.at(0), 4);
-//   ASSERT_EQ(shapes.at(1), 3);
-//   ASSERT_EQ(shapes.at(2), 2);
-// }
-// 
-// TEST(test_tensor, padding1) {
-//   using namespace my_infer;
-//   Tensor<float> tensor(3, 4, 5);
-//   ASSERT_EQ(tensor.channels(), 3);
-//   ASSERT_EQ(tensor.rows(), 4);
-//   ASSERT_EQ(tensor.cols(), 5);
-// 
-//   tensor.Fill(1.f);
-//   tensor.Padding({1, 2, 3, 4}, 0);
-//   ASSERT_EQ(tensor.rows(), 7);
-//   ASSERT_EQ(tensor.cols(), 12);
-// 
-//   int index = 0;
-//   for (int c = 0; c < tensor.channels(); ++c) {
-//     for (int r = 0; r < tensor.rows(); ++r) {
-//       for (int c_ = 0; c_ < tensor.cols(); ++c_) {
-//         if ((r >= 2 && r <= 4) && (c_ >= 3 && c_ <= 7)) {
-//           ASSERT_EQ(tensor.at(c, r, c_), 1.f) << c << " "
-//                                               << " " << r << " " << c_;
-//         }
-//         index += 1;
-//       }
-//     }
-//   }
-// }
-// 
-// TEST(test_tensor, padding2) {
-//   using namespace my_infer;
-//   ftensor tensor(3, 4, 5);
-//   ASSERT_EQ(tensor.channels(), 3);
-//   ASSERT_EQ(tensor.rows(), 4);
-//   ASSERT_EQ(tensor.cols(), 5);
-// 
-//   tensor.Fill(1.f);
-//   tensor.Padding({2, 2, 2, 2}, 3.14f);
-//   ASSERT_EQ(tensor.rows(), 8);
-//   ASSERT_EQ(tensor.cols(), 9);
-// 
-//   int index = 0;
-//   for (int c = 0; c < tensor.channels(); ++c) {
-//     for (int r = 0; r < tensor.rows(); ++r) {
-//       for (int c_ = 0; c_ < tensor.cols(); ++c_) {
-//         if (c_ <= 1 || r <= 1) {
-//           ASSERT_EQ(tensor.at(c, r, c_), 3.14f);
-//         } else if (c >= tensor.cols() - 1 || r >= tensor.rows() - 1) {
-//           ASSERT_EQ(tensor.at(c, r, c_), 3.14f);
-//         }
-//         if ((r >= 2 && r <= 5) && (c_ >= 2 && c_ <= 6)) {
-//           ASSERT_EQ(tensor.at(c, r, c_), 1.f);
-//         }
-//         index += 1;
-//       }
-//     }
-//   }
-// }
 // 
 // TEST(test_tensor, review1) {
 //   using namespace my_infer;
@@ -855,51 +905,6 @@ TEST(test_tensor, tensor_values_col1) {
 //   }
 // }
 // 
-// TEST(test_tensor, reshape1) {
-//   using namespace my_infer;
-//   arma::fmat f1 =
-//       "1,3;"
-//       "2,4";
-// 
-//   arma::fmat f2 =
-//       "1,3;"
-//       "2,4";
-// 
-//   sftensor data = TensorCreate<float>(2, 2, 2);
-//   data->slice(0) = f1;
-//   data->slice(1) = f2;
-//   data->Reshape({8});
-//   for (uint32_t i = 0; i < 4; ++i) {
-//     ASSERT_EQ(data->index(i), i + 1);
-//   }
-// 
-//   for (uint32_t i = 4; i < 8; ++i) {
-//     ASSERT_EQ(data->index(i - 4), i - 4 + 1);
-//   }
-// }
-// 
-// TEST(test_tensor, reshape2) {
-//   using namespace my_infer;
-//   arma::fmat f1 =
-//       "0,2;"
-//       "1,3";
-// 
-//   arma::fmat f2 =
-//       "0,2;"
-//       "1,3";
-// 
-//   sftensor data = TensorCreate<float>(2, 2, 2);
-//   data->slice(0) = f1;
-//   data->slice(1) = f2;
-//   data->Reshape({2, 4});
-//   for (uint32_t i = 0; i < 4; ++i) {
-//     ASSERT_EQ(data->index(i), i);
-//   }
-// 
-//   for (uint32_t i = 4; i < 8; ++i) {
-//     ASSERT_EQ(data->index(i), i - 4);
-//   }
-// }
 // 
 // TEST(test_tensor, ones) {
 //   using namespace my_infer;

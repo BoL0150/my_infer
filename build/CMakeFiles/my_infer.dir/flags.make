@@ -6,5 +6,5 @@ CXX_DEFINES = -DGFLAGS_IS_A_DLL=0 -DGTEST_LINKED_AS_SHARED_LIBRARY=1
 
 CXX_INCLUDES = -I/home/libo/my_infer/./include -isystem /home/libo/anaconda3/include
 
-CXX_FLAGS = 
+CXX_FLAGS = -g
 

@@ -1,0 +1,22 @@
+# ninja log v5
+3	3339	1721207262655371320	CMakeFiles/my_infer.dir/source/data/tensor.cpp.o	32f5d3ee4b3e8a17
+2	3702	1721207263025371287	CMakeFiles/my_infer.dir/test/test_create_tensor.cpp.o	f9aad353dde2dbf6
+3702	3947	1721207263265371266	my_infer	7a7d98e4708850d3
+2	3549	1721207262865371301	CMakeFiles/my_infer.dir/main.cpp.o	9732c10989101c66
+9	8568	1721209856735107694	CMakeFiles/my_infer.dir/source/data/tensor.cpp.o	32f5d3ee4b3e8a17
+9	8996	1721209857195107640	CMakeFiles/my_infer.dir/main.cpp.o	9732c10989101c66
+8	9213	1721209857415107614	CMakeFiles/my_infer.dir/test/test_create_tensor.cpp.o	f9aad353dde2dbf6
+9213	9571	1721209857775107574	my_infer	7a7d98e4708850d3
+2	4221	1721209997735081913	CMakeFiles/my_infer.dir/source/data/tensor.cpp.o	32f5d3ee4b3e8a17
+4221	4537	1721209998055081860	my_infer	7a7d98e4708850d3
+12	8822	1721722601715333675	CMakeFiles/my_infer.dir/source/data/tensor.cpp.o	32f5d3ee4b3e8a17
+11	10164	1721722603055333506	CMakeFiles/my_infer.dir/test/test_create_tensor.cpp.o	f9aad353dde2dbf6
+10164	10750	1721722603645333431	my_infer	7a7d98e4708850d3
+22	9528	1721743413607623600	CMakeFiles/my_infer.dir/source/data/tensor.cpp.o	32f5d3ee4b3e8a17
+22	9775	1721743413857623566	CMakeFiles/my_infer.dir/main.cpp.o	9732c10989101c66
+19	10983	1721743415067623403	CMakeFiles/my_infer.dir/test/test_create_tensor.cpp.o	f9aad353dde2dbf6
+10983	11489	1721743415567623336	my_infer	7a7d98e4708850d3
+4	10175	1721743614697603405	CMakeFiles/my_infer.dir/test/test_create_tensor.cpp.o	f9aad353dde2dbf6
+10176	10919	1721743615447603323	my_infer	7a7d98e4708850d3
+29	12552	1721744709037491217	CMakeFiles/my_infer.dir/test/test_create_tensor.cpp.o	f9aad353dde2dbf6
+12553	13279	1721744709767491127	my_infer	7a7d98e4708850d3
